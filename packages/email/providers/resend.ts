@@ -28,10 +28,10 @@ export async function sendViaResend(
       success: true,
       messageId: result.data?.id,
     };
-  } catch (error: any) {
+  } catch (error) {
     return {
       success: false,
-      message: error.message,
+      message: error instanceof Error ? error.message : String(error),
     };
   }
 }

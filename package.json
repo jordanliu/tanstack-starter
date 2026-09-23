@@ -1,25 +1,36 @@
 {
-  "name": "nextjs-starter",
+  "name": "tanstack-starter",
   "private": true,
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "start": "pnpm --filter web start",
     "lint": "turbo run lint",
+    "test": "turbo run test",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "@turbo/gen": "^2.10.4",
-    "prettier": "^3.9.4",
+    "@typescript/native": "npm:typescript@^7.0.2",
+    "@turbo/gen": "^2.11.2",
+    "prettier": "^3.9.8",
     "prettier-plugin-organize-imports": "^4.3.0",
-    "prettier-plugin-tailwindcss": "^0.8.0",
-    "turbo": "^2.10.4",
-    "typescript": "6.0.3"
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "turbo": "^2.11.2",
+    "typescript": "npm:@typescript/typescript6@^6.0.2"
   },
-  "packageManager": "pnpm@11.9.0",
+  "packageManager": "pnpm@12.4.2",
   "engines": {
     "node": ">=22.13.0"
+  },
+  "dependencies": {
+    "@tanstack/ai": "^0.55.0"
+  },
+  "intent": {
+    "skills": [
+      "*"
+    ]
   }
 }

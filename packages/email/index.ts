@@ -28,16 +28,16 @@ export async function sendEmail(options: {
   from?: string;
 }): Promise<EmailResult> {
   try {
-    return sendEmailWithProvider({
+    return await sendEmailWithProvider({
       to: options.to,
       subject: options.subject,
       from: options.from,
       template: options.react,
     });
-  } catch (error: any) {
+  } catch (error) {
     return {
       success: false,
-      message: `Failed to send email: ${error.message}`,
+      message: `Failed to send email: ${error instanceof Error ? error.message : String(error)}`,
     };
   }
 }

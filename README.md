@@ -1,38 +1,42 @@
-# next-starter
+# tanstack-starter
 
-A highly opinionated Next.js starter with better-auth, drizzle, postgres, shadcn/ui, react-email, and turborepo. Pre-configured for rapid, scalable development.
+A TanStack Start starter with Better Auth, Drizzle, PostgreSQL, shadcn/ui, React Email, Vite, and Turborepo. It keeps the app and shared packages split cleanly so the web app can grow without flattening the monorepo.
 
 ## Project Structure
 
-```
-nextjs-starter/
+```text
+tanstack-starter/
 ├── apps/
-│   └── web/                 # Main Next.js application
+│   └── web/                 # TanStack Start application
 ├── packages/
-│   ├── auth/               # Authentication utilities
-│   ├── database/           # Database schema and utilities
-│   ├── email/              # Email templates and providers
-│   ├── eslint-config/      # Shared ESLint configurations
-│   ├── typescript-config/  # Shared TypeScript configurations
-│   └── ui/                 # Shared UI components
-└── turbo/                  # Turborepo configuration
+│   ├── auth/                # Better Auth configuration and client helpers
+│   ├── database/            # Drizzle schema and database utilities
+│   ├── email/               # React Email templates and providers
+│   ├── eslint-config/       # Shared ESLint configurations
+│   ├── typescript-config/   # Shared TypeScript configurations
+│   └── ui/                  # Shared shadcn/ui components and styles
+└── turbo/                   # Turborepo generators
 ```
 
 ## Features
 
+- Full-stack React with [TanStack Start](https://tanstack.com/start) and [Vite](https://vite.dev)
 - Authentication with [Better Auth](https://www.better-auth.com/)
-- Database using [Drizzle ORM](https://orm.drizzle.team/) and [PostgreSQL](https://www.postgresql.org/)
-- UI components built with [shadcn/ui](https://ui.shadcn.com) and [Tailwind CSS](https://tailwindcss.com)
-- Email support with [react-email](https://react.email)
-- Form handling via [react-hook-form](https://react-hook-form.com)
-- Monorepo setup using [Turborepo](https://turbo.build/repo)
+- Database access with [Drizzle ORM](https://orm.drizzle.team/) and [PostgreSQL](https://www.postgresql.org/)
+- Shared UI built with [shadcn/ui](https://ui.shadcn.com) and [Tailwind CSS](https://tailwindcss.com)
+- Email templates with [React Email](https://react.email)
+- Password reset and verification email flows through Resend or SMTP
+- Form handling with [react-hook-form](https://react-hook-form.com)
+- Monorepo orchestration with [Turborepo](https://turbo.build/repo)
 
 ## Getting Started
 
-### 1. Create a New Project
+### 1. Create a Project
+
+Use this repository as a template or clone it directly:
 
 ```bash
-npx create-next-app@latest new-project --use-pnpm -e https://github.com/jordanliu/next-starter
+git clone <repo-url> new-project
 cd new-project
 ```
 
@@ -45,9 +49,11 @@ pnpm install
 ### 3. Set Up Environment Variables
 
 ```bash
-cp apps/web/.env.example apps/web/.env.local
-# Edit the .env.local file with your database and authentication configuration
+cp apps/web/.env.example apps/web/.env
+cp packages/database/.env.example packages/database/.env
 ```
+
+Edit the env files with your database, Better Auth, and email provider configuration.
 
 ### 4. Set Up the Database
 
@@ -56,119 +62,102 @@ pnpm --filter @repo/database generate
 pnpm --filter @repo/database migrate
 ```
 
-### 5. Start the Development Server
+### 5. Start Development
 
 ```bash
 pnpm dev
 ```
 
-The application will be available at [http://localhost:3000](http://localhost:3000).
+The web app runs at [http://localhost:3000](http://localhost:3000).
 
 ## Available Commands
 
-### Development
-
 ```bash
-pnpm dev          # Start development servers for all packages
-pnpm build        # Build all packages for production
-pnpm start        # Start production server (requires build)
+pnpm dev          # Start development servers
+pnpm build        # Build all packages and apps
+pnpm start        # Start the production web server after building
+pnpm lint         # Run ESLint across the workspace
+pnpm test         # Run automated tests across the workspace
+pnpm format       # Format TypeScript, TSX, and Markdown files
+pnpm check-types  # Run TypeScript checks
 ```
 
-### Code Quality
+## Database Commands
 
 ```bash
-pnpm lint         # Run ESLint across all packages
-pnpm format       # Format code with Prettier
-pnpm check-types  # Run TypeScript type checking
+pnpm --filter @repo/database generate  # Generate migration files
+pnpm --filter @repo/database migrate   # Apply committed migrations
+pnpm --filter @repo/database push      # Sync a disposable local database only
+pnpm --filter @repo/database studio    # Open Drizzle Studio
 ```
 
-### Database Operations
+## Local Auth
+
+Local email verification is disabled by default with `EMAIL_VERIFICATION_ENABLED=false`, so you can register and sign in without configuring email delivery. Password reset always requires either `EMAIL_API_KEY` for Resend or the `SMTP_*` settings. Set email verification to `true` once a provider is configured.
+
+## Package-Specific Commands
 
 ```bash
-pnpm --filter @repo/database generate  # Generate database migrations
-pnpm --filter @repo/database migrate   # Apply database migrations
-pnpm --filter @repo/database studio    # Open Drizzle Studio for database management
-pnpm --filter @repo/database seed      # Seed database with initial data
-```
-
-### Package-Specific
-
-```bash
-pnpm --filter web dev           # Run only the Next.js application
+pnpm --filter web dev           # Run only the TanStack Start app
+pnpm --filter web build         # Build only the web app
 pnpm --filter @repo/email dev   # Preview email templates
 ```
 
 ## Project Management
 
-### Adding New Packages
+### Adding Packages
 
 ```bash
 turbo gen
 ```
 
-Follow the prompts to scaffold a new package with proper TypeScript and build configurations.
-
 ### Adding shadcn/ui Components
 
 ```bash
 cd apps/web
-pnpm dlx shadcn@canary add [component-name]
+pnpm dlx shadcn@latest add [component-name]
 ```
 
-Components are automatically added to the UI package and can be imported across the monorepo.
+Components are added to the shared UI package and can be imported through `@repo/ui`.
 
 ### Managing Dependencies
 
 ```bash
-# Add to specific package
 pnpm --filter web add [package-name]
 pnpm --filter @repo/ui add [package-name]
-pnpm --filter @repo/database add [package-name]
-
-# Add to workspace root (affects all packages)
 pnpm add -w [package-name]
-
-# Add dev dependencies
-pnpm --filter web add -D [package-name]
-```
-
-### Working with Database Schema
-
-```bash
-# After modifying schema files
-pnpm --filter @repo/database generate  # Generate new migration
-pnpm --filter @repo/database migrate   # Apply to local database
-
-# Reset database (development only)
-pnpm --filter @repo/database reset
 ```
 
 ## Deployment
 
-### 1. Set Up Production Database
-
-Ensure your production PostgreSQL database is ready and accessible. Update your production environment variables with the database connection string.
-
-### 2. Run Database Migrations
+The web app builds with Vite and emits a Nitro server bundle:
 
 ```bash
-# Apply migrations to production database
-DATABASE_URL="your-production-db-url" pnpm --filter @repo/database migrate
+pnpm --filter web build
+pnpm --filter web start
 ```
 
-### 3. Build Application
-
-```bash
-pnpm build
-```
-
-### 4. Deploy
-
-Deploy the built application using your preferred hosting platform. Ensure the following environment variables are configured:
+Set production environment variables before deploying:
 
 ```env
 DATABASE_URL=your-production-database-url
 BETTER_AUTH_SECRET=your-secret-key
 BETTER_AUTH_URL=https://your-domain.com
-# Add other environment variables as needed
+EMAIL_FROM=noreply@your-domain.com
+
+# Configure Resend...
+EMAIL_API_KEY=your-resend-api-key
+
+# ...or configure SMTP instead.
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_USER=your-smtp-user
+SMTP_PASS=your-smtp-password
+SMTP_SECURE=false
+
+# Optional social providers
+GITHUB_CLIENT_ID=your-github-client-id
+GITHUB_CLIENT_SECRET=your-github-client-secret
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
 ```

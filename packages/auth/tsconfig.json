@@ -5,6 +5,7 @@
     "declaration": false,
     "declarationMap": false,
     "composite": false,
+    "types": ["node"],
     "paths": {
       "@/*": ["./*"],
       "@repo/*": ["../../packages/*"]
