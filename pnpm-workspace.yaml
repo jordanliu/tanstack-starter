@@ -10,12 +10,24 @@ minimumReleaseAgeExclude:
   - "@react-email/render@2.0.10"
   - "@react-email/ui@6.6.6"
   - react-email@6.6.6
-  - "@turbo/darwin-64@2.11.2"
-  - "@turbo/darwin-arm64@2.11.2"
-  - "@turbo/gen@2.11.2"
-  - "@turbo/linux-64@2.11.2"
-  - "@turbo/linux-arm64@2.11.2"
-  - "@turbo/windows-64@2.11.2"
-  - "@turbo/windows-arm64@2.11.2"
-  - eslint-plugin-turbo@2.11.2
-  - turbo@2.11.2
+  - '@turbo/darwin-64@2.11.5'
+  - '@turbo/darwin-arm64@2.11.5'
+  - '@turbo/gen@2.11.5'
+  - '@turbo/linux-64@2.11.5'
+  - '@turbo/linux-arm64@2.11.5'
+  - '@turbo/windows-64@2.11.5'
+  - '@turbo/windows-arm64@2.11.5'
+  - eslint-plugin-turbo@2.11.5
+  - turbo@2.11.5
+  - nodemailer@10.0.12
+  - '@typescript-eslint/eslint-plugin@8.71.0'
+  - '@typescript-eslint/parser@8.71.0'
+  - '@typescript-eslint/project-service@8.71.0'
+  - '@typescript-eslint/scope-manager@8.71.0'
+  - '@typescript-eslint/tsconfig-utils@8.71.0'
+  - '@typescript-eslint/type-utils@8.71.0'
+  - '@typescript-eslint/types@8.71.0'
+  - '@typescript-eslint/typescript-estree@8.71.0'
+  - '@typescript-eslint/utils@8.71.0'
+  - '@typescript-eslint/visitor-keys@8.71.0'
+  - typescript-eslint@8.71.0
