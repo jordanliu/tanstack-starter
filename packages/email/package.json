@@ -13,7 +13,7 @@
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-email": "^6.11.0",
-    "resend": "^6.30.0",
+    "resend": "^6.31.0",
     "zod": "^4.6.5"
   },
   "optionalDependencies": {

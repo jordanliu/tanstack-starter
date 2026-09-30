@@ -22,7 +22,7 @@
     "@tanstack/ai-openai": "^0.25.1",
     "@tanstack/react-router": "^1.170.40",
     "@tanstack/react-start": "^1.168.59",
-    "lucide-react": "^1.48.0",
+    "lucide-react": "^1.49.0",
     "pg": "^8.23.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
