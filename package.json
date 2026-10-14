@@ -13,20 +13,20 @@
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "@turbo/gen": "^2.11.5",
+    "@turbo/gen": "^2.11.8",
     "@typescript/native": "npm:typescript@^7.0.2",
-    "prettier": "^3.9.9",
+    "prettier": "^3.9.10",
     "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-tailwindcss": "^0.8.1",
-    "turbo": "^2.11.5",
+    "turbo": "^2.11.8",
     "typescript": "npm:@typescript/typescript6@^6.0.2"
   },
-  "packageManager": "pnpm@12.8.1",
+  "packageManager": "pnpm@12.11.2",
   "engines": {
     "node": ">=22.13.0"
   },
   "dependencies": {
-    "@tanstack/ai": "^0.63.0"
+    "@tanstack/ai": "^0.69.0"
   },
   "intent": {
     "skills": [
